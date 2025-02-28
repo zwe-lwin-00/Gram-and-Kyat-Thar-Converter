@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter - Grams to Kyattha and Kyattha to Grams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .container h1 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #388e3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .container h1 {
+                font-size: 20px;
+            }
+
+            input {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .container h1 {
+                font-size: 18px;
+            }
+
+            input {
+                font-size: 12px;
+            }
+
+            button {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Weight Converter</h1>
+
+        <!-- Grams to Kyattha Conversion Block -->
+        <div>
+            <label for="gramsInput">Enter weight in Grams (g):</label>
+            <input type="number" id="gramsInput" placeholder="Enter grams" oninput="convertToKyattha()">
+            <div id="gramsResult">
+                <p>Equivalent in Kyattha: <span id="kyatthaOutput">0</span> kyattha</p>
+            </div>
+        </div>
+
+        <!-- Kyattha to Grams Conversion Block -->
+        <div>
+            <label for="kyatthaInput">Enter weight in Kyattha:</label>
+            <input type="number" id="kyatthaInput" placeholder="Enter Kyattha" oninput="convertToGrams()">
+            <div id="kyatthaResult">
+                <p>Equivalent in Grams: <span id="gramsOutput">0</span> g</p>
+            </div>
+        </div>
+
+        <button onclick="convertBoth()">Convert Both</button>
+    </div>
+
+    <script>
+        const kyatthaConversionFactor = 16.3293;
+
+        // Convert Grams to Kyattha
+        function convertToKyattha() {
+            const grams = document.getElementById("gramsInput").value;
+            if (grams) {
+                const kyattha = grams / kyatthaConversionFactor;
+                document.getElementById("kyatthaOutput").innerText = kyattha.toFixed(2);
+            }
+        }
+
+        // Convert Kyattha to Grams
+        function convertToGrams() {
+            const kyattha = document.getElementById("kyatthaInput").value;
+            if (kyattha) {
+                const grams = kyattha * kyatthaConversionFactor;
+                document.getElementById("gramsOutput").innerText = grams.toFixed(2);
+            }
+        }
+
+        // Convert both Grams to Kyattha and Kyattha to Grams when clicking the button
+        function convertBoth() {
+            convertToKyattha();
+            convertToGrams();
+        }
+    </script>
+
+</body>
+</html>
