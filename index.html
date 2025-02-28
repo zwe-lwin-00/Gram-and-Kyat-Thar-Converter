@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: flex-start; /* Align to the top */
             padding: 20px;
-            min-height: 100vh; /* Ensure content takes full viewport height */
+            min-height: 100vh;
         }
 
         .container {
@@ -31,7 +31,7 @@
             max-width: 400px;
             text-align: center;
             transition: all 0.3s ease-in-out;
-            margin-top: 50px; /* Add margin from the top */
+            margin-top: 50px;
         }
 
         .container h1 {
@@ -63,11 +63,17 @@
             border-color: #4CAF50;
         }
 
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
+        /* Result Section Styles */
+        .result {
+            margin-top: 10px;
+            font-size: 16px;
             color: #333;
             font-weight: 500;
+        }
+
+        .result span {
+            font-weight: bold;
+            color: #4CAF50;
         }
 
         button {
@@ -128,7 +134,6 @@
                 font-size: 12px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -136,12 +141,19 @@
     <div class="container">
         <h1>အလေးချိန်ပြောင်းလဲခြင်း</h1>
 
+        <!-- Price per 100 grams Input Block -->
+        <div>
+            <label for="pricePer100Grams">အလေးချိန် 100 ဂရမ်နှင့်အညီ စျေးနှုန်း (MMK) ထည့်ပါ:</label>
+            <input type="number" id="pricePer100Grams" placeholder="100 ဂရမ် စျေးနှုန်း" oninput="calculatePrice()">
+        </div>
+
         <!-- Grams to Kyattha Conversion Block -->
         <div>
             <label for="gramsInput">အလေးချိန် ပမာဏကို ဂရမ် ဖြင့်ထည့်သွင်းပါ:</label>
-            <input type="number" id="gramsInput" placeholder="ဂရမ် ပမာဏ" oninput="convertToKyattha()">
-            <div id="gramsResult">
-                <p>ညီမျှသော ကျပ်သား: <span id="kyatthaOutput">0</span> ကျပ်သား</p>
+            <input type="number" id="gramsInput" placeholder="ဂရမ် ပမာဏ" oninput="convertToKyattha(); calculatePrice();">
+            <div class="result" id="gramsResult">
+                <p>ညီမျှသော ကျပ်သား: <span id="kyatthaOutput">0.00</span> ကျပ်သား</p>
+                <p>စျေးနှုန်း (ဂရမ်): <span id="pricePerGramOutput">0.00</span> MMK</p>
             </div>
         </div>
         <br>
@@ -149,12 +161,12 @@
         <!-- Kyattha to Grams Conversion Block -->
         <div>
             <label for="kyatthaInput">အလေးချိန် ပမာဏကို ကျပ်သား ဖြင့်ထည့်သွင်းပါ:</label>
-            <input type="number" id="kyatthaInput" placeholder="ကျပ်သား ပမာဏ" oninput="convertToGrams()">
-            <div id="kyatthaResult">
-                <p>ညီမျှသော ဂရမ်: <span id="gramsOutput">0</span> ဂရမ်</p>
+            <input type="number" id="kyatthaInput" placeholder="ကျပ်သား ပမာဏ" oninput="convertToGrams(); calculatePrice();">
+            <div class="result" id="kyatthaResult">
+                <p>ညီမျှသော ဂရမ်: <span id="gramsOutput">0.00</span> ဂရမ်</p>
+                <p>စျေးနှုန်း (ကျပ်သား): <span id="pricePerKyatthaOutput">0.00</span> MMK</p>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -167,7 +179,6 @@
                 const kyattha = grams / kyatthaConversionFactor;
                 document.getElementById("kyatthaOutput").innerText = kyattha.toFixed(2);
             } else {
-                // If the input is empty, set the result to 0
                 document.getElementById("kyatthaOutput").innerText = "0.00";
             }
         }
@@ -179,15 +190,31 @@
                 const grams = kyattha * kyatthaConversionFactor;
                 document.getElementById("gramsOutput").innerText = grams.toFixed(2);
             } else {
-                // If the input is empty, set the result to 0
                 document.getElementById("gramsOutput").innerText = "0.00";
             }
         }
 
-        // Convert both Grams to Kyattha and Kyattha to Grams when clicking the button
-        function convertBoth() {
-            convertToKyattha();
-            convertToGrams();
+        // Calculate Price based on entered value
+        function calculatePrice() {
+            const pricePer100Grams = parseFloat(document.getElementById("pricePer100Grams").value);
+            const grams = parseFloat(document.getElementById("gramsInput").value);
+            const kyattha = parseFloat(document.getElementById("kyatthaInput").value);
+
+            if (pricePer100Grams > 0) {
+                if (grams > 0) {
+                    const pricePerGram = (pricePer100Grams / 100) * grams;
+                    document.getElementById("pricePerGramOutput").innerText = pricePerGram.toFixed(2);
+                } else {
+                    document.getElementById("pricePerGramOutput").innerText = "0.00";
+                }
+
+                if (kyattha > 0) {
+                    const pricePerKyattha = (pricePer100Grams / 100) * (kyattha * kyatthaConversionFactor);
+                    document.getElementById("pricePerKyatthaOutput").innerText = pricePerKyattha.toFixed(2);
+                } else {
+                    document.getElementById("pricePerKyatthaOutput").innerText = "0.00";
+                }
+            }
         }
 
     </script>
