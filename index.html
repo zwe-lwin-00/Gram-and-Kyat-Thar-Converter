@@ -17,9 +17,9 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start; /* Align to the top */
             padding: 20px;
+            min-height: 100vh; /* Ensure content takes full viewport height */
         }
 
         .container {
@@ -31,6 +31,7 @@
             max-width: 400px;
             text-align: center;
             transition: all 0.3s ease-in-out;
+            margin-top: 50px; /* Add margin from the top */
         }
 
         .container h1 {
@@ -127,6 +128,7 @@
                 font-size: 12px;
             }
         }
+
     </style>
 </head>
 <body>
@@ -164,6 +166,9 @@
             if (grams) {
                 const kyattha = grams / kyatthaConversionFactor;
                 document.getElementById("kyatthaOutput").innerText = kyattha.toFixed(2);
+            } else {
+                // If the input is empty, set the result to 0
+                document.getElementById("kyatthaOutput").innerText = "0.00";
             }
         }
 
@@ -173,6 +178,9 @@
             if (kyattha) {
                 const grams = kyattha * kyatthaConversionFactor;
                 document.getElementById("gramsOutput").innerText = grams.toFixed(2);
+            } else {
+                // If the input is empty, set the result to 0
+                document.getElementById("gramsOutput").innerText = "0.00";
             }
         }
 
@@ -181,6 +189,7 @@
             convertToKyattha();
             convertToGrams();
         }
+
     </script>
 
 </body>
