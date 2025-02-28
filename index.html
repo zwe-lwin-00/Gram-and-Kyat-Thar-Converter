@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weight Converter - Grams to Kyattha and Kyattha to Grams</title>
+    <title>ဂရမ် နှင့် ကျပ်သား ပမာဏ</title>
     <style>
         * {
             margin: 0;
@@ -132,27 +132,27 @@
 <body>
 
     <div class="container">
-        <h1>Weight Converter</h1>
+        <h1>အလေးချိန်ပြောင်းလဲခြင်း</h1>
 
         <!-- Grams to Kyattha Conversion Block -->
         <div>
-            <label for="gramsInput">Enter weight in Grams (g):</label>
-            <input type="number" id="gramsInput" placeholder="Enter grams" oninput="convertToKyattha()">
+            <label for="gramsInput">အလေးချိန် ပမာဏကို ဂရမ် ဖြင့်ထည့်သွင်းပါ:</label>
+            <input type="number" id="gramsInput" placeholder="ဂရမ် ပမာဏ" oninput="convertToKyattha()">
             <div id="gramsResult">
-                <p>Equivalent in Kyattha: <span id="kyatthaOutput">0</span> kyattha</p>
+                <p>ညီမျှသော ကျပ်သား: <span id="kyatthaOutput">0</span> ကျပ်သား</p>
             </div>
         </div>
+        <br>
 
         <!-- Kyattha to Grams Conversion Block -->
         <div>
-            <label for="kyatthaInput">Enter weight in Kyattha:</label>
-            <input type="number" id="kyatthaInput" placeholder="Enter Kyattha" oninput="convertToGrams()">
+            <label for="kyatthaInput">အလေးချိန် ပမာဏကို ကျပ်သား ဖြင့်ထည့်သွင်းပါ:</label>
+            <input type="number" id="kyatthaInput" placeholder="ကျပ်သား ပမာဏ" oninput="convertToGrams()">
             <div id="kyatthaResult">
-                <p>Equivalent in Grams: <span id="gramsOutput">0</span> g</p>
+                <p>ညီမျှသော ဂရမ်: <span id="gramsOutput">0</span> ဂရမ်</p>
             </div>
         </div>
 
-        <button onclick="convertBoth()">Convert Both</button>
     </div>
 
     <script>
